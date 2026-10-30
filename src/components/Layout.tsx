@@ -4,7 +4,7 @@ import { ArrowUpRight, ChevronRight, FlaskConical, Layers3, Menu, Plus, ScanLine
 import { useHealth } from "../hooks/useHealth";
 
 export function Layout() {
-  const { error } = useHealth();
+  const { error, waking } = useHealth();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const developerPage = location.pathname === "/skills" || location.pathname.startsWith("/dev/");
@@ -35,7 +35,7 @@ export function Layout() {
         <header className="topbar">
           <button className="icon-btn mobile-menu" aria-label={menuOpen ? "Close navigation" : "Open navigation"} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={19} /> : <Menu size={19} />}</button>
           <div className="breadcrumbs"><NavLink to="/">Taste Test Dummy</NavLink><ChevronRight size={13} /><strong>{section}</strong></div>
-          <span className="workspace-status">{error ? "Service temporarily unavailable" : developerPage ? "Development workspace" : "Evidence before expensive mistakes."}</span>
+          <span className="workspace-status">{error ? "Service temporarily unavailable" : waking ? "Waking up the research service..." : developerPage ? "Development workspace" : "Evidence before expensive mistakes."}</span>
         </header>
         <main className="content" id="main-content" key={location.pathname}><Outlet /></main>
         <footer className="app-footer"><span>Taste Test Dummy</span><span>Crash-test your launch before the market does.</span></footer>
