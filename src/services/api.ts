@@ -2,8 +2,11 @@ import type {
   EntityHit, Health, LaunchBrief, Mode, SkillDetail, SkillsCatalog, Study, StudySummary, TagHit,
 } from "../types";
 
+// Set VITE_API_BASE_URL (empty string for the local Vite proxy) to override the hosted backend.
+export const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? "https://taste-test-dummy-backend.onrender.com").replace(/\/$/, "");
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`/api${path}`, {
+  const res = await fetch(`${API_BASE}/api${path}`, {
     headers: { "Content-Type": "application/json" },
     ...init,
   });
@@ -40,5 +43,5 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ task, input, json_output: false }),
     }),
-  reportUrl: (id: string) => `/api/studies/${id}/report.md`,
+  reportUrl: (id: string) => `${API_BASE}/api/studies/${id}/report.md`,
 };
