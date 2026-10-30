@@ -11,6 +11,9 @@ import "@fontsource/manrope/500.css";
 import "@fontsource/manrope/600.css";
 import "@fontsource/manrope/700.css";
 import "./design-system.css";
+import { wakeBackend } from "./hooks/useHealth";
+
+wakeBackend().catch(() => undefined);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
